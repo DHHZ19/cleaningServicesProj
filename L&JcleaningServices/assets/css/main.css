@@ -2998,6 +2998,9 @@ input, select, textarea {
 	}
 
 /* Banner */
+	#cleaningLogo{
+		padding: 80px;
+	}
 
 	.banner {
 		background-color: #4a4a4a;
