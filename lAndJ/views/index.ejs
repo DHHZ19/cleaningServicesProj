@@ -175,7 +175,7 @@
 
       <!-- Five -->
       <section id="five" class="wrapper special">
-        <h2>What people are saying</h2>
+        <h2>You don’t have to take our word for it</h2>
         <p>People love our work see here why!</p>
         <ul class="faces">
           <% for(let i=0; i < quoters.length; i++) { %>
@@ -192,7 +192,6 @@
             </p>
           </li>
           <li>
-            <span class="image"><img src="images/pic06.jpg" alt="" /></span>
             <h3>Sean Anderson</h3>
             <p>
               "Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor
@@ -200,7 +199,6 @@
             </p>
           </li>
           <li>
-            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
             <h3>Glena Smith</h3>
             <p>
               "Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor
@@ -208,13 +206,17 @@
             </p>
           </li>
         </ul>
-        <form action="/testimonals" method="POST">
-          <label for="name">Name</label>
-          <input type="text" placeholder="name" name="name" required />
-          <label for="testimonal">testimonal</label>
-          <input type="text" name="testimonal" placeholder="testimonal" />
-          <input type="submit" />
-        </form>
+        <h2>Add your Testimonal</h2>
+        <p>Tell us how we did</p>
+        <section class="form">
+          <form action="/testimonals" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" placeholder="name" name="name" required />
+            <label for="testimonal">Testimonal:</label>
+            <input type="text" name="testimonal" placeholder="testimonal" />
+            <input type="submit" />
+          </form>
+        </section>
       </section>
     </div>
 
@@ -226,6 +228,7 @@
         method="POST"
         action="https://formsubmit.co/52bc636fbb152dd63d99915566361bef"
       >
+        <label for="name">Name and Email:</label>
         <div class="row gtr-uniform">
           <div class="col-6 col-12-xsmall">
             <input
@@ -247,7 +250,7 @@
           </div>
           <!-- Break -->
           <div class="col-12">
-            <label for="category">Choose your desired cleaning service</label>
+            <label for="category">Choose your desired cleaning service:</label>
             <select name="category" id="category">
               <option value="Regular Clean">Regular Clean</option>
               <option value="Deep Clean">Deep Clean</option>
@@ -278,6 +281,7 @@
           </div>
           <!-- Break -->
           <div class="col-5 col-12-xsmall">
+            <label for="city">Where are we cleaning?</label>
             <!-- Minnesota-->
             <select id="city" name="city">
               <option value="">Select City</option>
