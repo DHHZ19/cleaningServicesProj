@@ -161,12 +161,6 @@ textarea {
   justify-content: center;
   /* outline: solid red; */
 }
-/* .form label {
-  display: flex;
-  justify-content: flex-start;
-  font-size: larger;
-  font-weight: bold;
-} */
 .form form {
   width: 50%;
   display: flex;

@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const { default: mongoose } = require("mongoose");
 const app = express();
 const moongoose = require("mongoose");
@@ -6,13 +7,9 @@ const Quoter = require("./models/Quoter");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect(
-  "mongodb+srv://diego:hi@cluster0.ygcsk.mongodb.net/?retryWrites=true&w=majority",
-  {},
-  () => {
-    console.log("conntectd to db");
-  }
-);
+mongoose.connect(process.env.DB_STRING, {}, () => {
+  console.log("conntectd to db");
+});
 
 app.get("/", async (req, res) => {
   const quoters = await Quoter.find({});
@@ -24,8 +21,8 @@ app.post("/testimonals", async (req, res) => {
     testimonal: req.body.testimonal,
   });
   res.redirect("/");
-  fw;
 });
-app.listen(3000, {}, () => {
+const PORT = 3000;
+app.listen(process.env.PORT || PORT, {}, () => {
   console.log(`connected to 3000`);
 });
