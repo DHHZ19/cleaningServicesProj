@@ -176,31 +176,15 @@
       <!-- Five -->
       <section id="five" class="wrapper special">
         <h2>What people are saying</h2>
-        <p>
-          Praesent dapibus, neque id cursus faucibus, tortor neque ege tas
-          augue, eu vulputate magna eros eu erat. Aliquam erat et volutpat. Nam
-          dui mi, tincidunt quis, accumsan porttitor tempus lorem ipsum dolor
-          sit amet consequat.
-        </p>
-        <ul class="faces">
-          <form action="/testimonals" method="POST">
-            <label for="name">Name</label>
-            <input type="text" placeholder="name" name="name" required />
-            <label for="testimonal">testimonal</label>
-            <input type="text" name="testimonal" placeholder="testimonal" />
-            <input type="submit" />
-          </form>
-        </ul>
-
+        <p>People love our work see here why!</p>
         <ul class="faces">
           <% for(let i=0; i < quoters.length; i++) { %>
           <li>
             <p><%= quoters[i].testimonal%>></p>
             <h3><%= quoters[i].name %></h3>
           </li>
-          <%} %> /*
+          <%} %>
           <li>
-            <span class="image"><img src="images/pic05.jpg" alt="" /></span>
             <h3>Vanessa</h3>
             <p>
               "Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor
@@ -224,7 +208,13 @@
             </p>
           </li>
         </ul>
-        */
+        <form action="/testimonals" method="POST">
+          <label for="name">Name</label>
+          <input type="text" placeholder="name" name="name" required />
+          <label for="testimonal">testimonal</label>
+          <input type="text" name="testimonal" placeholder="testimonal" />
+          <input type="submit" />
+        </form>
       </section>
     </div>
 
