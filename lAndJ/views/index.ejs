@@ -180,8 +180,9 @@
         <ul class="faces">
           <% for(let i=0; i < quoters.length; i++) { %>
           <li>
-            <p><%= quoters[i].testimonal%>></p>
+            <p>"<%= quoters[i].testimonal%>"</p>
             <h3><%= quoters[i].name %></h3>
+            <span class="del">delete this one</span>
           </li>
           <%} %>
           <li>
@@ -211,10 +212,16 @@
         <section class="form">
           <form action="/testimonals" method="POST">
             <label for="name">Name:</label>
-            <input type="text" placeholder="name" name="name" required />
+            <input
+              type="text"
+              placeholder="name"
+              name="name"
+              id="name"
+              required
+            />
             <label for="testimonal">Testimonal:</label>
             <input type="text" name="testimonal" placeholder="testimonal" />
-            <input type="submit" />
+            <input id="submit" type="submit" />
           </form>
         </section>
       </section>
@@ -827,7 +834,6 @@
       </ul>
       <p class="copyright">&copy; L & J's Cleaning Services.</p>
     </div>
-
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>

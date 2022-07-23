@@ -1,107 +1,122 @@
-/*
-	Elemental by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
-*/
+(function ($) {
+  var $window = $(window),
+    $body = $("body"),
+    $header = $("#header"),
+    $main = $("#main");
 
-(function($) {
+  // Breakpoints.
+  breakpoints({
+    xlarge: ["1281px", "1680px"],
+    large: ["981px", "1280px"],
+    medium: ["737px", "980px"],
+    small: ["481px", "736px"],
+    xsmall: ["361px", "480px"],
+    xxsmall: [null, "360px"],
+  });
 
-	var	$window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$main = $('#main');
+  // Play initial animations on page load.
+  $window.on("load", function () {
+    window.setTimeout(function () {
+      $body.removeClass("is-preload");
+    }, 100);
+  });
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ '361px',   '480px'  ],
-			xxsmall:  [ null,      '360px'  ]
-		});
+  // Dropdowns.
+  $("#nav > ul").dropotron({
+    alignment: "center",
+    openerActiveClass: "dropotron-active",
+  });
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+  // Header.
+  if ($header.hasClass("alt")) {
+    $window.on("resize", function () {
+      $window.trigger("scroll");
+    });
 
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			alignment: 'center',
-			openerActiveClass: 'dropotron-active'
-		});
+    $main.scrollex({
+      mode: "top",
+      top: "40vh",
+      enter: function () {
+        $header.removeClass("alt");
+      },
+      leave: function () {
+        $header.addClass("alt");
+        $header.addClass("reveal");
+      },
+    });
+  }
 
-	// Header.
-		if ($header.hasClass('alt')) {
+  // Nav Panel.
 
-			$window.on('resize', function() { $window.trigger('scroll'); });
+  // Button.
+  $(
+    '<div id="navButton">' +
+      '<a href="#navPanel" class="toggle"></a>' +
+      "</div>"
+  ).appendTo($body);
 
-			$main.scrollex({
-				mode:		'top',
-				top:		'40vh',
-				enter:		function() { $header.removeClass('alt'); },
-				leave:		function() { $header.addClass('alt'); $header.addClass('reveal'); }
-			});
+  // Panel.
+  $(
+    '<div id="navPanel">' +
+      "<nav>" +
+      $("#nav").navList() +
+      "</nav>" +
+      '<a href="#navPanel" class="close"></a>' +
+      "</div>"
+  )
+    .appendTo($body)
+    .panel({
+      delay: 500,
+      hideOnClick: true,
+      hideOnSwipe: true,
+      resetScroll: true,
+      resetForms: true,
+      side: "left",
+      //target: $body,
+      //visibleClass: 'navPanel-visible'
+    });
 
-		}
+  // Spotlights.
+  $(".spotlight").each(function () {
+    var $this = $(this),
+      $image = $this.find(".image"),
+      $img = $image.find("img"),
+      x;
 
-	// Nav Panel.
+    // No image? Skip.
+    if ($image.length == 0) return;
 
-		// Button.
-			$(
-				'<div id="navButton">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
+    // Assign image.
+    $image.css("background-image", "url(" + $img.attr("src") + ")");
 
-		// Panel.
-			$(
-				'<div id="navPanel">' +
-					'<nav>' +
-						$('#nav').navList() +
-					'</nav>' +
-					'<a href="#navPanel" class="close"></a>' +
-				'</div>'
-			)
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'left'
-					//target: $body,
-					//visibleClass: 'navPanel-visible'
-				});
+    // Set background position.
+    if ((x = $img.data("position"))) $image.css("background-position", x);
 
-	// Spotlights.
-		$('.spotlight')
-			.each(function() {
-
-				var	$this = $(this),
-					$image = $this.find('.image'),
-					$img = $image.find('img'),
-					x;
-
-				// No image? Skip.
-					if ($image.length == 0)
-						return;
-
-				// Assign image.
-					$image.css('background-image', 'url(' + $img.attr('src') + ')');
-
-				// Set background position.
-					if (x = $img.data('position'))
-						$image.css('background-position', x);
-
-				// Hide <img>.
-					$img.hide();
-
-			});
-
+    // Hide <img>.
+    $img.hide();
+  });
 })(jQuery);
+
+const remove = document.querySelectorAll(".del");
+Array.from(remove).forEach((element) => {
+  element.addEventListener("click", deleteTestimonal);
+});
+function deleteTestimonal() {
+  const sName = this.parentNode.childNodes[3].innerText;
+  console.log(sName);
+  const sTestimonal = this.parentNode.childNodes[2].innertext;
+
+  fetch("/deleteTestimonal", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: sName,
+    }),
+  })
+    .then((resp) => {
+      console.log(resp);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
